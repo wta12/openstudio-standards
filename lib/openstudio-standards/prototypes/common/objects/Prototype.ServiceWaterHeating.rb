@@ -389,15 +389,22 @@ class Standard
     hpwh.setOffCycleParasiticElectricLoad(0.0)
     hpwh.setParasiticHeatRejectionLocation('Outdoors')
 
+
+    temp_sch_type_limits = model_add_schedule_type_limits(model,
+      name: 'Temperature Schedule Type Limits',
+      lower_limit_value: 0.0,
+      upper_limit_value: 100.0,
+      numeric_type: 'Continuous',
+      unit_type: 'Temperature')
     # set temperature setpoint schedule
     if swh_temp_sch.nil?
       # temperature schedule type limits
-      temp_sch_type_limits = model_add_schedule_type_limits(model,
-                                                            name: 'Temperature Schedule Type Limits',
-                                                            lower_limit_value: 0.0,
-                                                            upper_limit_value: 100.0,
-                                                            numeric_type: 'Continuous',
-                                                            unit_type: 'Temperature')
+      # temp_sch_type_limits = model_add_schedule_type_limits(model,
+      #                                                       name: 'Temperature Schedule Type Limits',
+      #                                                       lower_limit_value: 0.0,
+      #                                                       upper_limit_value: 100.0,
+      #                                                       numeric_type: 'Continuous',
+      #                                                       unit_type: 'Temperature')
       # service water heating loop controls
       swh_temp_c = service_water_temperature
       swh_temp_f = OpenStudio.convert(swh_temp_c, 'C', 'F').get
@@ -408,6 +415,7 @@ class Standard
                                                          swh_temp_c,
                                                          name = "Heat Pump Water Heater Temp - #{swh_temp_f.round}F")
       swh_temp_sch.setScheduleTypeLimits(temp_sch_type_limits)
+    
     end
     hpwh.setCompressorSetpointTemperatureSchedule(swh_temp_sch)
 
