@@ -118,7 +118,9 @@ class Standard
     end
 
     weather_file = File.join(weather_dir, weather_file_name)
-
+    ##179D workaround for absolute weather file path input
+    weather_file = weather_file_name unless File.file? weather_file 
+    
     return weather_file
   end
 

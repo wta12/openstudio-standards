@@ -10,6 +10,7 @@ Standard.class_eval do
   # @param measure_model
   # @return
   def model_create_prototype_model(climate_zone, epw_file, sizing_run_dir = Dir.pwd, debug = false, measure_model = nil)
+    
     building_type = @instvarbuilding_type
     raise 'no building_type!' if @instvarbuilding_type.nil?
 
@@ -26,10 +27,13 @@ Standard.class_eval do
     # optionally  determine the climate zone from the epw and stat files.
     if climate_zone == 'NECB HDD Method'
       climate_zone = BTAP::Environment::WeatherFile.new(epw_file).a169_2006_climate_zone
+    elsif (File.file? epw_file)
+      OpenStudio.logFree(OpenStudio::Info, 'openstudio.model.Model', "#{epw_file} is a validatable full path")
     else
-      # this is required to be blank otherwise it may cause side effects.
-      epw_file = ''
+      # this is required to be blank otherwise it may cause side effects. 
+      epw_file = '' ## TODO this one also remove epw file input 
     end
+    OpenStudio.logFree(OpenStudio::Info, 'openstudio.model.Model', "used epw_path: #{epw_file}")
     model = load_geometry_osm(@geometry_file)
     model_custom_geometry_tweaks(model, building_type, climate_zone, @prototype_input)
     model.getThermostatSetpointDualSetpoints(&:remove)
