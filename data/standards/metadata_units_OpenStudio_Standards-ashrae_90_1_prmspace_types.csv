@@ -1,0 +1,13 @@
+Sheet,Name,Unit
+prm_interior_lighting,template,
+prm_interior_lighting,lpd_building_type,
+prm_interior_lighting,lpd_space_type,
+prm_interior_lighting,primary_space_type,
+prm_interior_lighting,secondary_space_type,
+prm_interior_lighting,w/ft^2,
+prm_interior_lighting,w/ft,
+prm_interior_lighting,notes,
+lpd_building_type,template,
+lpd_building_type,lpd_building_type,
+lpd_space_type,template,
+lpd_space_type,lpd_space_type,

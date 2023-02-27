@@ -43,11 +43,11 @@ spreadsheets_cbes = [
   "OpenStudio_Standards-cbes(space_types)",
 ]
 
-spreadsheet_titles = spreadsheets_ashrae + spreadsheets_deer + spreadsheets_comstock + spreadsheets_cbes
+spreadsheet_titles = spreadsheets_ashrae #+ spreadsheets_deer + spreadsheets_comstock + spreadsheets_cbes
 spreadsheet_titles = spreadsheet_titles.uniq
 
-spreadsheet_titles = ["OpenStudio_Standards-ashrae_90_1"]
-pp download_google_spreadsheets(spreadsheet_titles)
+# spreadsheet_titles = ["OpenStudio_Standards-ashrae_90_1"]
+# pp download_google_spreadsheets(spreadsheet_titles)
 
 pp export_spreadsheet_to_json(spreadsheet_titles)
 put
